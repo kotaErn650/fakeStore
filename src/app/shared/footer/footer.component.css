@@ -1,0 +1,21 @@
+.down {
+    position:unset;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    margin-top: 4rem;
+    color: rgb(255, 255, 255);
+    background-color: black;
+    z-index: 100;
+    box-shadow: 4px 4px 10px rgba(235, 252, 1, 0.345);
+  }
+  .down:hover {
+    color: black;
+    font-weight: bold;
+    background-color: rgba(218, 218, 213, 0.493);
+    font-size: 2rem;
+    box-shadow: 4px 4px 10px rgb(0, 0, 0);
+    transition: box-shadow 0.9s ease-in-out;
+  }
+  
