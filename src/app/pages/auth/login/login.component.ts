@@ -26,7 +26,7 @@ export default class LoginComponent {
       Swal.fire({
         position: 'center',
         icon: 'error',
-        title: 'Datos de acceso incompletos',
+        title: 'Datos incompletos',
         showConfirmButton: false,
         timer: 1500,
       });

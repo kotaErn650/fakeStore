@@ -1,9 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, resource } from '@angular/core';
 import { ProductService } from '../../../services/product.service';
 import { Product } from '../../../interfaces/store.interfaces';
 import { CardProductComponent } from '../../../components/card-product/card-product.component';
 import { CartStateService } from '../../../services/cart-state.service';
 import Swal from 'sweetalert2';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-product-list',
@@ -14,18 +15,12 @@ import Swal from 'sweetalert2';
 export default class ProductListComponent {
   productService = inject(ProductService);
   cartState = inject(CartStateService).state;
-  products: Product[] = [];
 
-  ngOnInit() {
-    this.getProducts();
-  }
-
-  getProducts() {
-    this.productService.getProducts().subscribe((resp) => {
-      this.products = resp;
-      console.log(this.products);
-    });
-  }
+//este  recurso para user
+  productsResource = rxResource({
+    request: () => ({}),
+    loader: () => this.productService.getProducts(),
+  });
 
   addToCart(product: Product) {
     this.cartState.add({

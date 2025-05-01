@@ -3,6 +3,8 @@ import { ProductService } from '../../../services/product.service';
 import { Product } from '../../../interfaces/store.interfaces';
 import { CartStateService } from '../../../services/cart-state.service';
 import Swal from 'sweetalert2';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-product-detail',
@@ -14,19 +16,19 @@ export default class ProductDetailComponent {
   productService = inject(ProductService);
   cartState = inject(CartStateService).state;
   id = input.required<string>();
-  product: Product | null = null;
   rate = 0;
 
-  ngOnInit() {
-    this.getProduct();
-  }
-
-  getProduct() {
-    this.productService.getProduct(this.id()).subscribe((resp) => {
-      this.product = resp;
-      this.rate = Math.round(this.product.rating.rate);
-    });
-  }
+  //aqui el detalle
+  productResource = rxResource({
+    request: () => ({ id: this.id() }),
+    loader: ({ request }) => {
+      return  this.productService.getProduct(request.id).pipe(
+        tap((resp) => {
+          this.rate = Math.round(resp.rating.rate);
+        }),
+      );
+    },
+  });
 
   createRange(number: number) {
     return new Array(number).fill(0).map((n, index) => index + 1);

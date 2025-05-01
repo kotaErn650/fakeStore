@@ -10,64 +10,72 @@
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ms-auto mb-lg-0">
-      @if (authService.login()) {
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            href="javascript:void(0)"
-            [routerLink]="['products']"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-            >🛍️ PRODUCTS</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            href="javascript:void(0)"
-            [routerLink]="['users']"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-            >👨🏻USERS</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            href="javascript:void(0)"
-            [routerLink]="['cart']"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-            >🛒 CART</a
-          >
-        </li>
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-lg-0">
+        @if (authService.login()) {
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="javascript:void(0)"
+              [routerLink]="['products']"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              >🛍️ PRODUCTS</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="javascript:void(0)"
+              [routerLink]="['users']"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              >👨🏻USERS</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link rounded-pill position-relative"
+              href="javascript:void(0)"
+              [routerLink]="['cart']"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              ><i class="bi bi-cart"></i>
+              @if (carState.count() > 0) {
+                <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                >
+                  {{ carState.count() }}
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+              }
+              CART
+            </a>
+          </li>
 
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            href="javascript:void(0)"
-            (click)="authService.logout()"
-            >🚷 LOGOUT</a
-          >
-        </li>
-      } @else {
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            href="javascript:void(0)"
-            [routerLink]="['login']"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-            >🚷 LOGIN</a
-          >
-        </li>
-      }
-      
-    </ul>
-  </div>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="javascript:void(0)"
+              (click)="authService.logout()"
+              >🚷 LOGOUT</a
+            >
+          </li>
+        } @else {
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="javascript:void(0)"
+              [routerLink]="['login']"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              >🚷 LOGIN</a
+            >
+          </li>
+        }
+      </ul>
+    </div>
   </div>
 </nav>
